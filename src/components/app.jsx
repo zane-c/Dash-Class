@@ -1,15 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Loader from 'halogen/ringloader';
+import * as api from '../actions/colors.js';
 import styles from './app.scss';
 
-const App = ({ children }) => (
-  <div className={styles.app}>
-    {children}
-  </div>
-);
+class App extends React.Component {
+  componentDidMount() {
+    this.props.generateColor();
+  }
+  render() {
+    const { color, children } = this.props;
+    return (
+      <div className={styles.app}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <div className={styles.loader}>
+              <Loader size={'20'} color={color} />
+            </div>
+            <div className={styles.logo}>Dash Class</div>
+          </div>
+          <div className={styles.body}>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+App.defaultProps = {
+  color: '#000000',
+};
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
+  color: PropTypes.string.isRequired,
+  generateColor: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = state => ({
+  color: state.colors.color,
+});
+
+const mapDispatchToProps = dispatch => ({
+  generateColor: () => {
+    dispatch(api.generateColor());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
