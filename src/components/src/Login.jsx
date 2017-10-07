@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Login.scss';
 
+// const MongoClient = require('mongodb').MongoClient;
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class Login extends React.Component {
       joinCode: '',
       createCode: '',
     };
+    // console.log(MongoClient);
   }
   render() {
     const { tabName, joinCode, createCode } = this.state;

@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "firebase": "^4.5.0",
     "halogen": "^0.2.0",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.31",

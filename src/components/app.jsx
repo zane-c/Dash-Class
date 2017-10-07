@@ -2,10 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Loader from 'halogen/ringloader';
+import firebase from 'firebase';
 import * as api from '../actions/colors.js';
 import styles from './app.scss';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    const config = {
+      apiKey: 'AIzaSyD8znqS3A56dxWQM7ErR2b4Ix0cgF60qeY',
+      authDomain: 'dash-class.firebaseapp.com',
+      databaseURL: 'https://dash-class.firebaseio.com',
+      projectId: 'dash-class',
+      storageBucket: 'dash-class.appspot.com',
+      messagingSenderId: '912068390452',
+    };
+
+    try {
+      firebase.initializeApp(config);
+    } catch (e) {
+      console.log('App reloaded, so firebase did not re-initialize');
+    }
+  }
   componentDidMount() {
     this.props.generateColor();
   }
