@@ -1,9 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './Login.scss';
-
-// const MongoClient = require('mongodb').MongoClient;
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,7 +10,16 @@ class Login extends React.Component {
       joinCode: '',
       createCode: '',
     };
-    // console.log(MongoClient);
+    this.onJoin = this.onJoin.bind(this);
+    this.onCreate = this.onCreate.bind(this);
+  }
+  onJoin(e) {
+    e.preventDefault();
+    console.log('join: ', this.state.joinCode);
+  }
+  onCreate(e) {
+    e.preventDefault();
+    console.log('create: ', this.state.createCode);
   }
   render() {
     const { tabName, joinCode, createCode } = this.state;
@@ -39,12 +45,7 @@ class Login extends React.Component {
           {tabName === 'join' ?
             <div className={styles.content}>
               <div>Enter class code to join</div>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  console.log('enter');
-                }}
-              >
+              <form onSubmit={this.onJoin}>
                 <input
                   type="text"
                   onChange={event => this.setState({ joinCode: event.target.value })}
@@ -56,12 +57,7 @@ class Login extends React.Component {
             :
             <div className={styles.content}>
               <div>Enter class name to start a session</div>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  console.log('enter');
-                }}
-              >
+              <form onSubmit={this.onCreate}>
                 <input
                   type="text"
                   onChange={event => this.setState({ createCode: event.target.value })}

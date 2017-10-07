@@ -37,6 +37,7 @@ class App extends React.Component {
               <Loader size={'20'} color={color} />
             </div>
             <div className={styles.logo}>Dash Class</div>
+            <div className={styles.exit}>Exit</div>
           </div>
           <div className={styles.body}>
             {children}
