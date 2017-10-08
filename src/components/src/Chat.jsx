@@ -7,8 +7,13 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: true,
+      isOpen: false,
       message: '',
+      messageList: [
+        { id: 1, text: 'Hello!', user: 'Freddy', time: '10123123' },
+        { id: 2, text: 'Does anyone have the ntoes?', user: 'Sarah', time: '10123123' },
+        { id: 3, text: 'This is my favorite class', user: 'Matt', time: '10123123' },
+      ],
     };
     this.onSend = this.onSend.bind(this);
   }
@@ -19,7 +24,7 @@ class Chat extends React.Component {
     this.setState({ message: '' });
   }
   render() {
-    const { isOpen, message } = this.state;
+    const { isOpen, message, messageList } = this.state;
     return (
       <div className={styles.container}>
         <div
@@ -40,45 +45,11 @@ class Chat extends React.Component {
         {isOpen &&
           <div className={styles.chat}>
             <div className={styles.messageArea}>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
-              <div className={styles.message}>
-                Anonymous1: Hello!
-              </div>
+              {messageList.map(msg => (
+                <div key={msg.id} className={styles.message}>
+                  {msg.user}: {msg.text}
+                </div>
+              ))}
             </div>
             <div className={styles.input}>
               <form onSubmit={this.onSend}>

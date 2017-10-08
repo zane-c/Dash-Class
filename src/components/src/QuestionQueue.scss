@@ -1,9 +1,60 @@
-.container {
+ .container {
   background-color: white;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   margin-right: 5px;
+}
+
+.title {
+  padding: 20px;
+  font-size: 16px;
+}
+
+.input {
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 20px;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.questionQueue {
+  overflow-y: auto;
+  margin: 0 20px;
+  margin-bottom: 20px;
+}
+
+.question {
+  margin-bottom: 5px;
+  background-color: #fcfcfc;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.upvotes {
+  padding: 0 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.arrow {
+  cursor: pointer;
+  color: #ccc;
+  &:hover {
+    color: #aaa;
+  }
+}
+
+.questionText {
+  display: flex;
+  align-items: center;
 }

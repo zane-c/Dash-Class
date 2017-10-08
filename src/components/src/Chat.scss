@@ -54,7 +54,12 @@
 }
 
 .input {
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   input {
-    width: 95%;
+    width: 100%;
   }
 }
