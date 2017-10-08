@@ -27,21 +27,21 @@ const reducer = (state = defaults, action) => {
         userId: action.userId,
       };
     }
-    case api.SET_QUESTION_DATA: {
+    case api.LISTEN_ON_QUESTION_DATA: {
       const data = action.snapshot.val() || [];
       return {
         ...state,
         questionData: data.sort((a, b) => (a.upvotes < b.upvotes)),
       };
     }
-    case api.SET_CHAT_DATA: {
+    case api.LISTEN_ON_CHAT_DATA: {
       const data = action.snapshot.val() || [];
       return {
         ...state,
-        chatData: data.reverse(),
+        chatData: data,
       };
     }
-    case api.SET_POLL_DATA: {
+    case api.LISTEN_ON_POLL_DATA: {
       const data = action.snapshot.val() || [];
       return {
         ...state,

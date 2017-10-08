@@ -11,11 +11,6 @@ class QuestionQueue extends React.Component {
     this.state = {
       question: '',
       voted: [],
-      questionQueue: [
-        { id: 1, upvotes: 6, text: 'I don\'t understand inversions.', answered: false },
-        { id: 2, upvotes: 12, text: 'How do I implement merge sort?', answered: true },
-        { id: 3, upvotes: 2, text: 'What is a red black tree?', answered: false },
-      ],
     };
     this.onAsk = this.onAsk.bind(this);
     this.onVote = this.onVote.bind(this);

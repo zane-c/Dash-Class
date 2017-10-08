@@ -22,7 +22,7 @@ class App extends React.Component {
     try {
       firebase.initializeApp(config);
     } catch (e) {
-      console.log('App reloaded, so firebase did not re-initialize');
+      // App reloaded, so firebase did not re-initialize
     }
   }
   componentDidMount() {
