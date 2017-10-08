@@ -63,8 +63,8 @@ class QuestionQueue extends React.Component {
         <div className={styles.questionQueue}>
           {questionData
             .filter(q => (q.text.toLowerCase().indexOf(question.toLowerCase()) !== -1))
-            .map(ques => (
-              <div className={styles.question} key={ques.text}>
+            .map((ques, idx) => (
+              <div className={styles.question} key={ques.text + idx}>
                 <div className={styles.upvotes}>
                   <div
                     className={styles.arrow}

@@ -10,6 +10,8 @@ const middleware = store => next => (action) => {
         .on('value', snapshot => store.dispatch(api.listenOnQuestionData(snapshot)));
       firebase.database().ref(`rooms/${action.roomId}/chat`)
         .on('value', snapshot => store.dispatch(api.listenOnChatData(snapshot)));
+      firebase.database().ref(`rooms/${action.roomId}/pollData`)
+        .on('value', snapshot => store.dispatch(api.listenOnPollData(snapshot)));
 
       next(action);
       return hashHistory.push('/dashboard');
@@ -27,6 +29,8 @@ const middleware = store => next => (action) => {
         .on('value', snapshot => store.dispatch(api.listenOnQuestionData(snapshot)));
       firebase.database().ref(`rooms/${action.roomId}/chat`)
         .on('value', snapshot => store.dispatch(api.listenOnChatData(snapshot)));
+      firebase.database().ref(`rooms/${action.roomId}/pollData`)
+        .on('value', snapshot => store.dispatch(api.listenOnPollData(snapshot)));
 
       next(action);
       return hashHistory.push('/dashboard');
@@ -41,6 +45,13 @@ const middleware = store => next => (action) => {
     case api.UPDATE_CHAT: {
       const { roomId } = store.getState().dashboard;
       firebase.database().ref(`rooms/${roomId}/chat`).set(
+        action.newData,
+      );
+      return next(action);
+    }
+    case api.UPDATE_POLLS: {
+      const { roomId } = store.getState().dashboard;
+      firebase.database().ref(`rooms/${roomId}/pollData`).set(
         action.newData,
       );
       return next(action);

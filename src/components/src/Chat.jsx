@@ -21,7 +21,7 @@ class Chat extends React.Component {
     const { chatData, userId } = this.props;
     const newMessage = {
       text: message,
-      username: `Anonymous-${userId}`,
+      username: userId,
       timestamp: Math.floor(Date.now() / 1000),
     };
     const newData = [...chatData, newMessage];
@@ -53,7 +53,10 @@ class Chat extends React.Component {
             <div className={styles.messageArea}>
               {chatData.map(msg => (
                 <div key={msg.timestamp} className={styles.message}>
-                  <span className={styles.username}>{msg.username}: </span>
+                  <span
+                    className={styles.username}
+                    style={{ color: msg.username.split(' ')[0] }}
+                  >{msg.username}: </span>
                   {msg.text}
                 </div>
               ))}
