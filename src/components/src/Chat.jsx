@@ -11,7 +11,7 @@ class Chat extends React.Component {
       message: '',
       messageList: [
         { id: 1, text: 'Hello!', user: 'Freddy', time: '10123123' },
-        { id: 2, text: 'Does anyone have the ntoes?', user: 'Sarah', time: '10123123' },
+        { id: 2, text: 'Does anyone have the notes?', user: 'Sarah', time: '10123123' },
         { id: 3, text: 'This is my favorite class', user: 'Matt', time: '10123123' },
       ],
     };
