@@ -31,8 +31,12 @@ Too many times I've gone to class to see all my peers around me on their laptops
 The goal is that this environment will not steal focus away from a instructor but rather keep their student body focused on class material and participating.
 
 
+#### Technical Specifications
+- Backend api built using **Firebase**
+- Frontend built using Reactjs (2300 lines)
+- Hosted on Micrsoft Azure
 
-### Local Installation
+#### Local Installation
 
 ```
 npm install
