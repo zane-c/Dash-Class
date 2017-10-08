@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Chat from './Chat.jsx';
 import Polls from './Polls.jsx';
+import PollsAdmin from './PollsAdmin.jsx';
 import QuestionQueue from './QuestionQueue.jsx';
 import QuestionQueueAdmin from './QuestionQueueAdmin.jsx';
 import styles from './Dashboard.scss';
@@ -17,7 +18,11 @@ const Dashboard = ({ isAdmin }) => (
       }
     </div>
     <div className={styles.section}>
-      <Polls />
+      {isAdmin ?
+        <PollsAdmin />
+        :
+        <Polls />
+      }
       <Chat />
     </div>
   </div>
