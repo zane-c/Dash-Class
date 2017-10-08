@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Loader from 'halogen/ringloader';
 import firebase from 'firebase';
+import { Link } from 'react-router';
 import * as api from '../actions/colors.js';
 import styles from './app.scss';
 
@@ -37,7 +38,7 @@ class App extends React.Component {
               <Loader size={'20'} color={color} />
             </div>
             <div className={styles.logo}>Dash Class</div>
-            <div className={styles.exit}>Exit</div>
+            <Link to="/" className={styles.exit}>Exit</Link>
           </div>
           <div className={styles.body}>
             {children}

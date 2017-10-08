@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import styles from './Login.scss';
 
 class Login extends React.Component {
@@ -16,10 +17,12 @@ class Login extends React.Component {
   onJoin(e) {
     e.preventDefault();
     console.log('join: ', this.state.joinCode);
+    hashHistory.push('/dashboard');
   }
   onCreate(e) {
     e.preventDefault();
     console.log('create: ', this.state.createCode);
+    hashHistory.push('/dashboard');
   }
   render() {
     const { tabName, joinCode, createCode } = this.state;
