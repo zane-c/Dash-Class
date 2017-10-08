@@ -41,47 +41,83 @@ class Polls extends React.Component {
     const { pollData } = this.props;
     const activePoll = pollData.filter(poll => (poll.state !== 'inactive'))[0];
 
+    let element;
+    if (!activePoll) {
+      element = (
+        <div className={styles.pollText}>
+          No active polls
+        </div>
+      );
+    } else if (activePoll.state === 'open') {
+      if (submitted) {
+        element = (
+          <div>
+            <div className={styles.pollText}>
+              {activePoll.text}
+            </div>
+            <div className={styles.answer}>
+              You picked {answer || activePoll.options[0].text}
+            </div>
+          </div>
+        );
+      } else {
+        element = (
+          <div>
+            <div className={styles.pollText}>
+              {activePoll.text}
+            </div>
+            <div className={styles.options}>
+              <RadioGroup onChange={this.onChange}>
+                {activePoll.options.map((opt, idx) => (
+                  <ReversedRadioButton
+                    key={`${opt.text}${idx}`}
+                    value={opt.text}
+                  >
+                    {opt.text}
+                  </ReversedRadioButton>
+                ))}
+              </RadioGroup>
+              <div
+                className={styles.button}
+                onClick={() => this.onSubmit(activePoll.options[0].text)}
+              >
+                Submit
+              </div>
+            </div>
+          </div>
+        );
+      }
+    } else if (activePoll.state === 'result') {
+      let total = 0;
+      for (let i = 0; i < activePoll.options.length; i += 1) {
+        total += activePoll.options[i].votes;
+      }
+      console.log(total);
+      element = (
+        <div>
+          <div className={styles.pollText}>
+            {activePoll.text}
+          </div>
+          {activePoll.options.map((opt, idx) => (
+            <div className={styles.result} key={`${opt.text}${idx}`}>
+              <div className={styles.votes}>
+                {opt.votes} Votes
+              </div>
+              <div className={styles.resultText}>
+                {opt.text}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
     return (
       <div className={styles.container}>
         <div className={styles.title}>
           Polls
         </div>
         <div className={styles.content}>
-          {!activePoll ?
-            <div className={styles.pollText}>
-              No active polls
-            </div>
-            :
-            <div>
-              <div className={styles.pollText}>
-                {activePoll.text}
-              </div>
-              {submitted ?
-                <div className={styles.answer}>
-                  You picked {answer || activePoll.options[0].text}
-                </div>
-                :
-                <div className={styles.options}>
-                  <RadioGroup onChange={this.onChange}>
-                    {activePoll.options.map((opt, idx) => (
-                      <ReversedRadioButton
-                        key={`${opt.text}${idx}`}
-                        value={opt.text}
-                      >
-                        {opt.text}
-                      </ReversedRadioButton>
-                    ))}
-                  </RadioGroup>
-                  <div
-                    className={styles.button}
-                    onClick={() => this.onSubmit(activePoll.options[0].text)}
-                  >
-                    Submit
-                  </div>
-                </div>
-              }
-            </div>
-          }
+          {element}
         </div>
       </div>
     );

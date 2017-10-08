@@ -8,7 +8,7 @@
 }
 
 .content {
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .title {
@@ -27,6 +27,20 @@
 .answer {
   color: rgb(140, 185, 253);
   padding: 20px;
+}
+
+.votes {
+  color: rgb(140, 185, 253);
+}
+
+.result {
+  display: flex;
+  padding: 10px 20px;
+  flex-direction: row;
+}
+
+.resultText {
+  padding-left: 20px;
 }
 
 .button {
