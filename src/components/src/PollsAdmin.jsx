@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updatePolls } from '../../actions/dashboard.js';
 import Button from './Button.jsx';
+import PollModal from './PollModal.jsx';
 import styles from './PollsAdmin.scss';
 
 class PollsAdmin extends React.Component {
@@ -10,10 +11,6 @@ class PollsAdmin extends React.Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      pollObj: {
-        type: 'poll',
-        state: 'inactive',
-      },
     };
     this.toggleModal = () => this.setState({ isModalOpen: !this.state.isModalOpen });
     this.changePollState = this.changePollState.bind(this);
@@ -30,11 +27,14 @@ class PollsAdmin extends React.Component {
     updatePollsAction(newData);
   }
   render() {
-    // const { isModalOpen } = this.state;
+    const { isModalOpen } = this.state;
     const { pollData } = this.props;
 
     return (
       <div className={styles.container}>
+        {isModalOpen &&
+          <PollModal pollData={pollData} onClose={this.toggleModal} />
+        }
         <div className={styles.pollHeader}>
           <div className={styles.title}>
             Polls

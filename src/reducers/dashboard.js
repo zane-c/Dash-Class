@@ -12,10 +12,9 @@ const defaults = {
 const reducer = (state = defaults, action) => {
   switch (action.type) {
     case api.JOIN_ROOM: {
-      console.log('CHANGE THIS');
       return {
         ...state,
-        isAdmin: true,
+        isAdmin: false,
         roomId: action.roomId,
         userId: action.userId,
       };
