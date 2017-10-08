@@ -1,6 +1,6 @@
 # Dash Class
 
-#### An Agumenent Interactive App For the Classroom
+#### An Augmented Interactive App For the Classroom
 
 Too many times I've gone to class to see all my peers around me on their laptops or phones during class doing completely unrelated things; Browsing facebook, internet memes, and cute animal vids. In our age of technology, we are addicted to stimulus response. Social interaction has changed both online and in person. Dash Class is an app designed to innovate the classroom experience by creating an interactive digital room to assist the lecturer deliver data to students and keep them participating and focused.
 
