@@ -35,6 +35,11 @@ The goal is that this environment will not steal focus away from a instructor bu
 - Backend api built using **Firebase**
 - Frontend built using Reactjs (2300 lines)
 - Hosted on Micrsoft Azure
+- Mobile app built using expo and can be found in a separate repo https://github.com/cedricholz/Dash-Class
+
+#### Team
+- Zane Christenson
+- Cedric Holz
 
 #### Local Installation
 
