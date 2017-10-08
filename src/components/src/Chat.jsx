@@ -53,7 +53,8 @@ class Chat extends React.Component {
             <div className={styles.messageArea}>
               {chatData.map(msg => (
                 <div key={msg.timestamp} className={styles.message}>
-                  {msg.username}: {msg.text}
+                  <span className={styles.username}>{msg.username}: </span>
+                  {msg.text}
                 </div>
               ))}
             </div>

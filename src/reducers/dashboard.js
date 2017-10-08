@@ -2,8 +2,8 @@ import * as api from '../actions/dashboard.js';
 
 const defaults = {
   isAdmin: false,
-  roomId: null,
-  userId: null,
+  roomId: '00000',
+  userId: '000',
   questionData: [],
   chatData: [],
   pollData: [],

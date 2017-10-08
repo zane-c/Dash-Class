@@ -29,7 +29,7 @@ class App extends React.Component {
     this.props.generateColor();
   }
   render() {
-    const { color, children } = this.props;
+    const { color, children, roomId } = this.props;
     return (
       <div className={styles.app}>
         <div className={styles.container}>
@@ -38,6 +38,9 @@ class App extends React.Component {
               <Loader size={'20'} color={color} />
             </div>
             <div className={styles.logo}>Dash Class</div>
+            {roomId !== '00000' &&
+              <div className={styles.roomId}>Class Code: {roomId}</div>
+            }
             <Link to="/" className={styles.exit}>Exit</Link>
           </div>
           <div className={styles.body}>
@@ -57,10 +60,12 @@ App.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
   generateColor: PropTypes.func.isRequired,
+  roomId: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   color: state.colors.color,
+  roomId: state.dashboard.roomId,
 });
 
 const mapDispatchToProps = dispatch => ({
