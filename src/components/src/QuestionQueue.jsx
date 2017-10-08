@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
-import FaAngleDown from 'react-icons/lib/fa/angle-down';
+import { updateQuestions } from '../../actions/dashboard.js';
 import styles from './QuestionQueue.scss';
 
 class QuestionQueue extends React.Component {
@@ -8,22 +10,53 @@ class QuestionQueue extends React.Component {
     super(props);
     this.state = {
       question: '',
+      voted: [],
       questionQueue: [
         { id: 1, upvotes: 6, text: 'I don\'t understand inversions.', answered: false },
         { id: 2, upvotes: 12, text: 'How do I implement merge sort?', answered: true },
         { id: 3, upvotes: 2, text: 'What is a red black tree?', answered: false },
       ],
     };
+    this.onAsk = this.onAsk.bind(this);
+    this.onVote = this.onVote.bind(this);
+  }
+  onAsk(e) {
+    e.preventDefault();
+    const { question } = this.state;
+    const { questionData } = this.props;
+    const newQuestion = {
+      answered: false,
+      text: question,
+      upvotes: 1,
+    };
+    this.setState({ question: '' });
+    this.props.updateQuestionsAction(questionData.concat(newQuestion));
+  }
+  onVote(text) {
+    const { voted } = this.state;
+    if (voted.includes(text)) {
+      return;
+    }
+    const dataCopy = this.props.questionData.map((q) => {
+      const copy = { ...q };
+      if (q.text === text) {
+        copy.upvotes += 1;
+      }
+      return copy;
+    });
+    this.setState({ voted: [...voted, text] });
+    this.props.updateQuestionsAction(dataCopy);
   }
   render() {
-    const { question, questionQueue } = this.state;
+    const { question, voted } = this.state;
+    const { questionData } = this.props;
     return (
       <div className={styles.container}>
         <div className={styles.title}>
           Question Queue
         </div>
         <div className={styles.input}>
-          <form onSubmit={() => null}>
+          <form onSubmit={this.onAsk}>
             <input
               type="text"
               onChange={e => this.setState({ question: e.target.value })}
@@ -33,25 +66,28 @@ class QuestionQueue extends React.Component {
           </form>
         </div>
         <div className={styles.questionQueue}>
-          {questionQueue
+          {questionData
             .filter(q => (q.text.toLowerCase().indexOf(question.toLowerCase()) !== -1))
             .map(ques => (
-              <div className={styles.question} key={ques.id}>
+              <div className={styles.question} key={ques.text}>
                 <div className={styles.upvotes}>
-                  <div className={styles.arrow}>
+                  <div
+                    className={styles.arrow}
+                    onClick={() => this.onVote(ques.text)}
+                  >
                     <FaAngleUp size="15px" />
                   </div>
                   <div
-                    data-answered={ques.answered}
+                    data-voted={voted.includes(ques.text)}
                     className={styles.upvotesNumber}
                   >
                     {ques.upvotes}
                   </div>
-                  <div className={styles.arrow}>
-                    <FaAngleDown size="15px" />
-                  </div>
                 </div>
-                <div className={styles.questionText}>
+                <div
+                  className={styles.questionText}
+                  data-voted={voted.includes(ques.text)}
+                >
                   {ques.text}
                 </div>
               </div>
@@ -62,4 +98,18 @@ class QuestionQueue extends React.Component {
   }
 }
 
-export default QuestionQueue;
+QuestionQueue.propTypes = {
+  updateQuestionsAction: PropTypes.func.isRequired,
+  questionData: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+  isAdmin: state.dashboard.isAdmin,
+  questionData: state.dashboard.questionData,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateQuestionsAction: newList => dispatch(updateQuestions(newList)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionQueue);

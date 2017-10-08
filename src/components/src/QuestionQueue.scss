@@ -46,6 +46,15 @@
   flex-direction: column;
 }
 
+.upvotesNumber {
+  padding-bottom: 3px;
+
+  &[data-voted=true] {
+    font-weight: bold;
+    color: rgb(140, 185, 253);
+  }
+}
+
 .arrow {
   cursor: pointer;
   color: #ccc;

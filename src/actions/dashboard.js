@@ -19,3 +19,21 @@ export const setQuestionData = snapshot => ({
   type: SET_QUESTION_DATA,
   snapshot,
 });
+
+export const UPDATE_QUESTIONS = 'UPDATE_QUESTIONS';
+export const updateQuestions = newData => ({
+  type: UPDATE_QUESTIONS,
+  newData,
+});
+
+export const SET_CHAT_DATA = 'SET_CHAT_DATA';
+export const setChatData = snapshot => ({
+  type: SET_CHAT_DATA,
+  snapshot,
+});
+
+export const SET_POLL_DATA = 'SET_POLL_DATA';
+export const setPollData = snapshot => ({
+  type: SET_POLL_DATA,
+  snapshot,
+});

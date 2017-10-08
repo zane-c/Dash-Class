@@ -34,6 +34,20 @@ const reducer = (state = defaults, action) => {
         questionData: data.sort((a, b) => (a.upvotes < b.upvotes)),
       };
     }
+    case api.SET_CHAT_DATA: {
+      const data = action.snapshot.val() || [];
+      return {
+        ...state,
+        chatData: data.reverse(),
+      };
+    }
+    case api.SET_POLL_DATA: {
+      const data = action.snapshot.val() || [];
+      return {
+        ...state,
+        pollData: data,
+      };
+    }
     default: {
       return state;
     }
