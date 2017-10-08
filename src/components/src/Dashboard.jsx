@@ -1,30 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Chat from './Chat.jsx';
 import Polls from './Polls.jsx';
 import QuestionQueue from './QuestionQueue.jsx';
+import QuestionQueueAdmin from './QuestionQueueAdmin.jsx';
 import styles from './Dashboard.scss';
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // state
-    };
-  }
-  render() {
-    return (
-      <div className={styles.container}>
-        <div className={styles.section}>
-          <QuestionQueue />
-        </div>
-        <div className={styles.section}>
-          <Polls />
-          <Chat />
-        </div>
-      </div>
-    );
-  }
-}
+const Dashboard = ({ isAdmin }) => (
+  <div className={styles.container}>
+    <div className={styles.section}>
+      {isAdmin ?
+        <QuestionQueueAdmin />
+        :
+        <QuestionQueue />
+      }
+    </div>
+    <div className={styles.section}>
+      <Polls />
+      <Chat />
+    </div>
+  </div>
+);
 
-export default connect(null, null)(Dashboard);
+Dashboard.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => ({
+  isAdmin: state.dashboard.isAdmin,
+});
+
+export default connect(mapStateToProps)(Dashboard);

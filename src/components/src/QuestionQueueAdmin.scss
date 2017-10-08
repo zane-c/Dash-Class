@@ -38,32 +38,23 @@
   flex-direction: row;
 }
 
-.upvotes {
-  padding: 0 10px;
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
 .upvotesNumber {
-  padding-bottom: 3px;
-
-  &[data-voted=true] {
-    font-weight: bold;
-    color: rgb(140, 185, 253);
-  }
-}
-
-.arrow {
-  cursor: pointer;
-  color: #aaa;
-  &:hover {
-    color: #aaa;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
 }
 
 .questionText {
   display: flex;
   align-items: center;
+  flex: 1;
+  padding: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
 }

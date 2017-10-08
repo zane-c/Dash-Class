@@ -88,11 +88,6 @@ class Polls extends React.Component {
         );
       }
     } else if (activePoll.state === 'result') {
-      let total = 0;
-      for (let i = 0; i < activePoll.options.length; i += 1) {
-        total += activePoll.options[i].votes;
-      }
-      console.log(total);
       element = (
         <div>
           <div className={styles.pollText}>

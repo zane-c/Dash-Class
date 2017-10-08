@@ -42,9 +42,9 @@ class Chat extends React.Component {
           </div>
           <div className={styles.toggleArrow}>
             {isOpen ?
-              <FaAngleDown size="22px" color="#ccc" />
+              <FaAngleDown size="22px" color="#aaa" />
               :
-              <FaAngleUp size="22px" color="#ccc" />
+              <FaAngleUp size="22px" color="#aaa" />
             }
           </div>
         </div>

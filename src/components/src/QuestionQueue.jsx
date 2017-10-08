@@ -44,7 +44,7 @@ class QuestionQueue extends React.Component {
   }
   render() {
     const { question, voted } = this.state;
-    const { questionData } = this.props;
+    const questionData = this.props.questionData.filter(q => (!q.answered));
     return (
       <div className={styles.container}>
         <div className={styles.title}>
