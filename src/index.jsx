@@ -12,12 +12,17 @@ import Login from './components/src/Login.jsx';
 import colorsMiddleware from './middleware/colors.js';
 import colorsReducer from './reducers/colors.js';
 
+import dashboardMiddleware from './middleware/dashboard.js';
+import dashboardReducer from './reducers/dashboard.js';
+
 const rootMiddleware = [
   colorsMiddleware,
+  dashboardMiddleware,
 ];
 
 const rootReducer = combineReducers({
   colors: colorsReducer,
+  dashboard: dashboardReducer,
   routing: routerReducer,
 });
 

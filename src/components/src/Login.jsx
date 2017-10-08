@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+import firebase from 'firebase';
+import { joinRoom, createRoom } from '../../actions/dashboard.js';
 import styles from './Login.scss';
 
 class Login extends React.Component {
@@ -9,23 +11,29 @@ class Login extends React.Component {
     this.state = {
       tabName: 'join',
       joinCode: '',
-      createCode: '',
+      joinText: 'Enter class code to join',
     };
     this.onJoin = this.onJoin.bind(this);
     this.onCreate = this.onCreate.bind(this);
   }
   onJoin(e) {
     e.preventDefault();
-    console.log('join: ', this.state.joinCode);
-    hashHistory.push('/dashboard');
+    const { joinCode } = this.state;
+
+    firebase.database().ref('/rooms/').once('value').then((snapshot) => {
+      if (snapshot.hasChild(joinCode)) {
+        this.props.joinAction(this.state.joinCode);
+      } else {
+        this.setState({ joinText: 'Invalid entry code' });
+      }
+    });
   }
   onCreate(e) {
     e.preventDefault();
-    console.log('create: ', this.state.createCode);
-    hashHistory.push('/dashboard');
+    this.props.createAction();
   }
   render() {
-    const { tabName, joinCode, createCode } = this.state;
+    const { tabName, joinCode, joinText } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles.loginBox}>
@@ -47,27 +55,25 @@ class Login extends React.Component {
           </div>
           {tabName === 'join' ?
             <div className={styles.content}>
-              <div>Enter class code to join</div>
+              <div>{joinText}</div>
               <form onSubmit={this.onJoin}>
                 <input
                   type="text"
                   onChange={event => this.setState({ joinCode: event.target.value })}
                   value={joinCode}
-                  placeholder={'CS195'}
+                  placeholder={'ex: XY78K'}
                 />
               </form>
             </div>
             :
             <div className={styles.content}>
-              <div>Enter class name to start a session</div>
-              <form onSubmit={this.onCreate}>
-                <input
-                  type="text"
-                  onChange={event => this.setState({ createCode: event.target.value })}
-                  value={createCode}
-                  placeholder={'CS195'}
-                />
-              </form>
+              <div>Start a new classroom session</div>
+              <div
+                className={styles.button}
+                onClick={this.onCreate}
+              >
+                Create
+              </div>
             </div>
           }
         </div>
@@ -76,4 +82,14 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, null)(Login);
+Login.propTypes = {
+  joinAction: PropTypes.func.isRequired,
+  createAction: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  joinAction: roomId => dispatch(joinRoom(roomId)),
+  createAction: () => dispatch(createRoom()),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

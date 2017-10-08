@@ -28,30 +28,40 @@ class Polls extends React.Component {
         <div className={styles.title}>
           Polls
         </div>
-        <div className={styles.pollText}>
-          What is your favorite sorting algorithm?
-        </div>
-        {submitted ?
-          <div className={styles.answer}>
-            You picked {answer}
-          </div>
-          :
-          <div className={styles.options}>
-            <RadioGroup onChange={this.onChange}>
-              {options.map(opt => (
-                <ReversedRadioButton key={opt.id} value={opt.text}>
-                  {opt.text}
-                </ReversedRadioButton>
-              ))}
-            </RadioGroup>
-            <div
-              className={styles.button}
-              onClick={this.onSubmit}
-            >
-              Submit
+        <div className={styles.content}>
+          {options.length === 0 ?
+            <div className={styles.pollText}>
+              No active polls
             </div>
-          </div>
-        }
+            :
+            <div>
+              <div className={styles.pollText}>
+                What is your favorite sorting algorithm?
+              </div>
+              {submitted ?
+                <div className={styles.answer}>
+                  You picked {answer}
+                </div>
+                :
+                <div className={styles.options}>
+                  <RadioGroup onChange={this.onChange}>
+                    {options.map(opt => (
+                      <ReversedRadioButton key={opt.id} value={opt.text}>
+                        {opt.text}
+                      </ReversedRadioButton>
+                    ))}
+                  </RadioGroup>
+                  <div
+                    className={styles.button}
+                    onClick={this.onSubmit}
+                  >
+                    Submit
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
       </div>
     );
   }
