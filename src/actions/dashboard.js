@@ -6,7 +6,7 @@ const generateUsername = () => {
     'Jellyfish', 'Salmon',
   ];
   const colors = [
-    'Red', 'Blue', 'Yellow', 'Green', 'Violet', 'Orange', 'Purple', 'Indigo',
+    'Red', 'Blue', 'Green', 'Violet', 'Orange', 'Purple', 'Indigo',
   ];
   const n1 = Math.floor(animals.length * Math.random());
   const n2 = Math.floor(colors.length * Math.random());

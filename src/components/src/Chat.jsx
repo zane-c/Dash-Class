@@ -15,6 +15,11 @@ class Chat extends React.Component {
     };
     this.onSend = this.onSend.bind(this);
   }
+  componentDidUpdate() {
+    if (this.chatArea) {
+      this.chatArea.scrollTop = this.chatArea.scrollHeight;
+    }
+  }
   onSend(e) {
     e.preventDefault();
     const { message } = this.state;
@@ -50,9 +55,9 @@ class Chat extends React.Component {
         </div>
         {isOpen &&
           <div className={styles.chat}>
-            <div className={styles.messageArea}>
+            <div className={styles.messageArea} ref={(ref) => { this.chatArea = ref; }}>
               {chatData.map(msg => (
-                <div key={msg.timestamp} className={styles.message}>
+                <div key={msg.timestamp + msg.text} className={styles.message}>
                   <span
                     className={styles.username}
                     style={{ color: msg.username.split(' ')[0] }}
