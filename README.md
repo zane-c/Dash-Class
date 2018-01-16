@@ -4,8 +4,8 @@
 
 Too many times I've gone to class to see all my peers around me on their laptops or phones during class doing completely unrelated things; Browsing facebook, internet memes, and cute animal vids. In our age of technology, we are addicted to stimulus response. Social interaction has changed both online and in person. Dash Class is an app designed to innovate the classroom experience by creating an interactive digital room to assist the lecturer deliver data to students and keep them participating and focused.
 
-#### View the website LIVE on microsoft AZURE
-- http://dashclassapp.azurewebsites.net/
+#### View the website here
+- http://bitbyte.site/dashclass/
 
 #### Features
 - **Creating a room**
@@ -37,13 +37,10 @@ The goal is that this environment will not steal focus away from a instructor bu
 - Hosted on Micrsoft Azure
 - Mobile app built using expo and can be found in a separate repo https://github.com/cedricholz/Dash-Class
 
-#### Team
-- Zane Christenson
-- Cedric Holz
-
 #### Local Installation
 
 ```
 npm install
 npm start
 ```
+then proceed to `localhost:9090`
